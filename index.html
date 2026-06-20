@@ -1,0 +1,1288 @@
+<!doctype html>
+<html lang="tr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hayallerinizin Tatlısı — Tatlı Kafe</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --pink1: #ffd6e8;
+            --pink2: #ffb6d5;
+            --card: #ffffffcc;
+            --accent: #ff6fa3
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Poppins', system-ui, Segoe UI, Arial, sans-serif;
+            color: #333
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--pink1), var(--pink2));
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 40px
+        }
+
+        .wrap {
+            width: 100%;
+            max-width: 1100px
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 24px;
+            justify-content: space-between
+        }
+
+        .logo {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 10px 18px;
+            border-radius: 12px;
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .brand {
+            font-family: 'Dancing Script', cursive;
+            font-size: 34px;
+            color: #8b0f4a
+        }
+
+        .tag {
+            font-size: 14px;
+            color: #7a2a4a;
+            margin-left: 6px
+        }
+
+        .intro {
+            margin-bottom: 18px;
+            color: #5a2b3d
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(138, 50, 88, 0.14);
+            transition: transform .18s ease, box-shadow .18s ease
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 40px rgba(138, 50, 88, 0.18)
+        }
+
+        .img-wrap {
+            position: relative
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 50%;
+            padding: 8px;
+            border: 0;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(138, 50, 88, 0.12);
+            font-size: 16px
+        }
+
+        .card-body {
+            padding: 14px
+        }
+
+        .dessert-name {
+            font-weight: 600;
+            color: #5a1f3a;
+            margin: 0 0 6px 0
+        }
+
+        .desc {
+            font-size: 13px;
+            color: #6b4353;
+            margin: 0 0 10px
+        }
+
+        .meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .price {
+            font-weight: 700;
+            color: var(--accent)
+        }
+
+        .love {
+            background: transparent;
+            border: 0;
+            color: #e83b77;
+            font-size: 18px;
+            cursor: pointer
+        }
+
+        .rating-container {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid #f0d6e8
+        }
+
+        .rating-label {
+            font-size: 12px;
+            color: #7a2a4a;
+            margin-bottom: 4px;
+            display: block
+        }
+
+        .stars {
+            display: flex;
+            gap: 4px;
+            font-size: 18px
+        }
+
+        .star {
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            user-select: none
+        }
+
+        .star:hover,
+        .star.filled {
+            transform: scale(1.2)
+        }
+
+        .star.filled {
+            color: #ffc107
+        }
+
+        .star.empty {
+            color: #ddd
+        }
+
+        .favorite-section {
+            display: flex;
+            gap: 8px;
+            align-items: center
+        }
+
+        .favorite-btn {
+            background: linear-gradient(135deg, #ff6fa3, #ff4d85);
+            border: none;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease
+        }
+
+        .favorite-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(255, 77, 136, 0.3)
+        }
+
+        .favorite-btn.added {
+            background: #ff6fa3;
+        }
+
+        .calories-info {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            background: linear-gradient(135deg, rgba(255, 214, 232, 0.5), rgba(255, 182, 213, 0.5));
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 12px;
+            color: #7a2a4a;
+            border-left: 3px solid #ff6fa3
+        }
+
+        .calories-value {
+            font-weight: 700;
+            color: #ff6fa3;
+            font-size: 14px
+        }
+
+        footer {
+            margin-top: 28px;
+            text-align: center;
+            color: #6b4353
+        }
+
+        @media (max-width:520px) {
+            body {
+                padding: 20px
+            }
+
+            .brand {
+                font-size: 28px
+            }
+
+            .card img {
+                height: 160px
+            }
+        }
+
+        /* corner decorations */
+        .corner {
+            position: fixed;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 8px 24px rgba(138, 50, 88, 0.12);
+            color: #ff4d85;
+            font-size: 18px;
+            z-index: 20
+        }
+
+        .corner.tl {
+            top: 12px;
+            left: 12px
+        }
+
+        .corner.tr {
+            top: 12px;
+            right: 12px
+        }
+
+        .corner.bl {
+            bottom: 12px;
+            left: 12px
+        }
+
+        .corner.br {
+            bottom: 12px;
+            right: 12px
+        }
+
+        /* floral frame strips */
+        .frame-top,
+        .frame-bottom {
+            position: fixed;
+            left: 0;
+            right: 0;
+            height: 56px;
+            pointer-events: none;
+            z-index: 14;
+            background-image: url('images/flower_tile.svg');
+            background-repeat: repeat-x;
+            background-position: center;
+            background-size: 56px 56px;
+        }
+
+        .frame-top {
+            top: 0
+        }
+
+        .frame-bottom {
+            bottom: 0;
+            transform: rotate(180deg)
+        }
+
+        .frame-left,
+        .frame-right {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 56px;
+            pointer-events: none;
+            z-index: 14;
+            background-image: url('images/flower_tile.svg');
+            background-repeat: repeat-y;
+            background-position: center;
+            background-size: 56px 56px;
+        }
+
+        .frame-left {
+            left: 0
+        }
+
+        .frame-right {
+            right: 0;
+            transform: scaleX(-1)
+        }
+
+        .card {
+            transition: 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 77, 136, 0.6);
+        }
+
+
+        .card img {
+            transition: 0.4s ease;
+        }
+
+        .card:hover img {
+            transform: scale(1.1);
+        }
+
+        .search-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .search-container input {
+            padding: 10px 14px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-container select {
+            padding: 10px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+        }
+
+        .price {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+
+        }
+
+        old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 14px;
+            ;
+        }
+
+        new-price {
+
+            color: #ff4d;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <header>
+            <div class="logo">
+                <svg width="42" height="42" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 21s-6.5-4.35-9-7.5C-0.5 6 5 3 7 6c1.5 2.4 5 5.5 5 5.5s3.5-3.1 5-5.5c2-3 7.5 0 4 7.5C18.5 16.65 12 21 12 21z"
+                        fill="#ff6fa3" />
+                </svg>
+                <div>
+                    <div class="brand">Pink Crave</div>
+                    <div class="tag">Bi ısırık yetmez.</div>
+                </div>
+            </div>
+            <nav aria-label="Ana Menü">
+                <a href="#menu" style="color:#5a1f3a;text-decoration:none;margin-right:14px;font-weight:600">Menü</a>
+                <a href="#favorilerim"
+                    style="color:#5a1f3a;text-decoration:none;margin-right:14px;font-weight:600">Favorilerim</a>
+                <a href="#hakkimizda"
+                    style="color:#5a1f3a;text-decoration:none;margin-right:14px;font-weight:600">Hakkımızda</a>
+                <a href="#iletisim" style="color:#5a1f3a;text-decoration:none">İletişim</a>
+            </nav>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Tatlı ara... 🍰">
+
+                <select id="categoryFilter">
+                    <option value="">Tüm Tatlılar</option>
+                    <option value="şerbetli">Şerbetli Tatlılar</option>
+                    <option value="çikolatalı">Çikolatalı Tatlılar</option>
+                    <option value="sütlü">Sütlü Tatlılar</option>
+                </select>
+            </div>
+
+        </header>
+
+        <p class="intro">Pembe bulutlar arasında, yalnızca tatlılara adanmış menümüz — her biri biraz daha aşık
+            hissettirsin.</p>
+
+        <!-- To update this list automatically based on the image folder, run
+             python generate_cards.py in the project root; copy/paste the output
+             back inside this section. The script will detect JPG/PNG/WEBP files and
+             any matching SVG fallback. -->
+        <section id="menu" class="grid">
+            <!-- 1 -->
+            <article class="card" data-category="kahve" data-dessert-id="tiramisu" data-dessert-name="Tiramisu">
+                <div class="img-wrap">
+                    <img src="images/tiramisu.webp" alt="Tiramisu"
+                        data-srcs='["images/tiramisu.webp","images/tiramisu.svg"]'>
+                    <button class="badge" aria-label="Kahve">☕</button>
+                </div>
+                <div class="card-body">
+                    <h3 class="dessert-name">Tiramisu ❤️</h3>
+                    <p class="desc">Klasik İtalyan kahveli keki, mascarpone ile sarılmış tatlı bir kucaklama.</p>
+                    <div class="favorite-section">
+                        <button class="favorite-btn" data-dessert="tiramisu">➕ Ekle</button>
+                    </div>
+                    <div class="rating-container">
+                        <span class="rating-label">Değerlendirme:</span>
+                        <div class="stars" data-dessert="tiramisu">
+                            <span class="star empty" data-rating="1">★</span>
+                            <span class="star empty" data-rating="2">★</span>
+                            <span class="star empty" data-rating="3">★</span>
+                            <span class="star empty" data-rating="4">★</span>
+                            <span class="star empty" data-rating="5">★</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 6px">
+                        <div class="meta">
+                            <div class="price">₺150</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 2 -->
+            <article class="card" data-category="" data-dessert-id="cheesecake" data-dessert-name="Cheesecake">
+                <div class="img-wrap">
+                    <img src="images/cheesecake.jpg" alt="Cheesecake"
+                        data-srcs='["images/cheesecake.jpg","images/cheesecake.svg"]'>
+                    <button class="badge" aria-label="Pasta">🍰</button>
+                </div>
+                <div class="card-body">
+                    <h3 class="dessert-name">Cheesecake</h3>
+                    <p class="desc">Kremamsı peynir dolgusu, çıtır taban ve hafif meyve sosuyla.</p>
+                    <div class="favorite-section">
+                        <button class="favorite-btn" data-dessert="cheesecake">➕ Ekle</button>
+                    </div>
+                    <div class="rating-container">
+                        <span class="rating-label">Değerlendirme:</span>
+                        <div class="stars" data-dessert="cheesecake">
+                            <span class="star empty" data-rating="1">★</span>
+                            <span class="star empty" data-rating="2">★</span>
+                            <span class="star empty" data-rating="3">★</span>
+                            <span class="star empty" data-rating="4">★</span>
+                            <span class="star empty" data-rating="5">★</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 6px">
+                        <div class="meta">
+                            <div class="price">₺170</div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 3 -->
+            <article class="card" data-category="sütlü">
+                <div class="img-wrap">
+                    <img src="images/panna_cotta.jpg" alt="Panna Cotta"
+                        data-srcs='["images/panna_cotta.jpg","images/panna_cotta.svg"]'>
+                    <button class="badge" aria-label="Krem">🍮</button>
+                </div>
+                <div class="card-body">
+                    <h3 class="dessert-name">Panna Cotta</h3>
+                    <p class="desc">Vanilyalı süt jölesi, hafif ve zarif bir tatlı dokunuş.</p>
+                    <div class="meta">
+                        <div class="price">
+                            <span class="old-price">₺250</span>
+                            <span class="new-price">₺200</span>
+                        </div>
+                        <button class="love">❤️</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 4 -->
+            <article class="card" data-category="şerbetli">
+                <div class="img-wrap">
+                    <img src="images/baklava.png" alt="Baklava" data-srcs='["images/baklava.png","images/baklava.svg"]'>
+                    <button class="badge" aria-label="Fıstık">🌰</button>
+                </div>
+                <div class="card-body">
+                    <h3 class="dessert-name">Baklava</h3>
+                    <p class="desc">İncecik yufka, bol fıstık ve tatlı şerbet — nostalji dolu bir dilim.</p>
+                    <div class="meta">
+                        <div class="price">₺140</div><button class="love">❤️</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 5 -->
+            <article class="card" data-category="çikolatalı">
+                <div class="img-wrap">
+                    <img src="images/eclair.jpg" alt="Eclair" data-srcs='["images/eclair.jpg","images/eclair.svg"]'>
+                    <button class="badge" aria-label="Çikolata">🍫</button>
+                </div>
+                <div class="card-body">
+                    <h3 class="dessert-name">Éclair</h3>
+                    <p class="desc">Puf puf hamur, krema dolgusu ve çikolata kaplamasıyla.</p>
+                    <div class="meta">
+                        <div class="price">₺150</div><button class="love">❤️</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- yeni -->
+            <article class="card" data-category="çikolatalı">
+                <div class="img-wrap">
+                    <img src="images/eclair_2.jpg" alt="Éclair 2" data-srcs='["images/eclair_2.jpg"]'>
+                    <button class="badge" aria-label="Çikolata">🍫</button>
+                </div>
+                <div class="card-body">
+                    <h3 class="dessert-name">Éclair 2</h3>
+                    <p class="desc">Alternatif fotoğraf — farklı sunum.</p>
+                    <div class="meta">
+                        <div class="price">₺140</div><button class="love">❤️</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 6 -->
+            <article class="card" data-category="">
+                <div class="img-wrap">
+                    <img src="images/macarons.webp" alt="Macarons"
+                        data-srcs='["images/macarons.webp","images/macarons.svg"]'>
+                    <button class="badge" aria-label="Şeker">🍬</button>
+                </div>
+                <div class="card-body">
+                    <h3 class="dessert-name">Makaron (Macaron)</h3>
+                    <p class="desc">Renkli, hafif ve aşk dolu ısırıklar — bir kutuda çok mutluluk.</p>
+                    <div class="meta">
+                        <div class="price">₺50</div><button class="love">❤️</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 7 -->
+            <article class="card" data-category="çikolatalı">
+                <div class="img-wrap">
+                    <img src="images/chocolate_lava_cake.jpg" alt="Lava Cake"
+                        data-srcs='["images/chocolate_lava_cake.jpg","images/lava_cake.svg"]'>
+                    <button class="badge" aria-label="Sıcak">🔥</button>
+                </div>
+                <div class="card-body">
+                    <h3 class="dessert-name">Çikolatalı Lava Cake</h3>
+                    <p class="desc">Sıcak, akışkan çikolata merkeziyle yoğun ama sevgi dolu.</p>
+                    <div class="meta">
+                        <div class="price">₺250</div><button class="love">❤️</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 8 -->
+            <article class="card" data-category="">
+                <div class="img-wrap">
+                    <img src="images/strawberry_tart.jpg" alt="Strawberry Tart"
+                        data-srcs='["images/strawberry_tart.jpg","images/strawberry_tart.svg"]'>
+                    <button class="badge" aria-label="Çilek">🍓</button>
+                </div>
+                <div class="card-body">
+                    <h3 class="dessert-name">Çilekli Tart</h3>
+                    <p class="desc">Taze çilekler ve kremanın zarif birlikteliği.</p>
+                    <div class="meta">
+                        <div class="price">₺150</div><button class="love">❤️</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 9 -->
+            <article class="card" data-category="sütlü">
+                <div class="img-wrap">
+                    <img src="images/creme_brule.jpg" alt="Crème Brûlée"
+                        data-srcs='["images/creme_brule.jpg","images/creme_brulee.svg"]'>
+                    <button class="badge" aria-label="Karamel">🍯</button>
+                </div>
+                <div class="card-body">
+                    <h3 class="dessert-name">Crème Brûlée</h3>
+                    <p class="desc">Karamelize üst tabaka, sütlü krema — şekerlenmiş bir öpücük.</p>
+                    <div class="meta">
+                        <div class="price">₺150</div><button class="love">❤️</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 10 -->
+            <article class="card" data-category="">
+                <div class="img-wrap">
+                    <img src="images/mille_feuille.jpg" alt="Mille-Feuille"
+                        data-srcs='["images/mille_feuille.jpg","images/mille_feuille.svg"]'>
+                    <button class="badge" aria-label="Kruvasan">🥐</button>
+                </div>
+                <div class="card-body">
+                    <h3 class="dessert-name">Mille-Feuille</h3>
+                    <p class="desc">Kat kat çıtırlık, kremalı dokunuşlarla nostaljik bir tat.</p>
+                    <div class="meta">
+                        <div class="price">₺200</div><button class="love">❤️</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 11 -->
+            <article class="card" data-category="şerbetli">
+                <div class="img-wrap">
+                    <img src="images/kunefe.jpg" alt="Künefe" data-srcs='["images/kunefe.jpg","images/kunefe.svg"]'>
+                    <button class="badge" aria-label="Peynirli">🧀</button>
+                </div>
+                <div class="card-body">
+                    <h3 class="dessert-name">Künefe</h3>
+                    <p class="desc">Tel kadayıf, peynir ve şerbetin çıtır uyumu.</p>
+                    <div class="meta">
+                        <div class="price">₺150</div><button class="love">❤️</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 12 -->
+            <article class="card" data-category="">
+                <div class="img-wrap">
+                    <img src="images/crepe_suzette.jpg" alt="Crêpe Suzette"
+                        data-srcs='["images/crepe_suzette.jpg","images/crepe_suzette.svg"]'>
+                    <button class="badge" aria-label="Portakal">🍊</button>
+                </div>
+                <div class="card-body">
+                    <h3 class="dessert-name">Crêpe Suzette</h3>
+                    <p class="desc">Portakal soslu ince krep, alevli Fransız klasiği.</p>
+                    <div class="meta">
+                        <div class="price">₺150</div><button class="love">❤️</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 13 -->
+            <article class="card" data-category="çikolatalı">
+                <div class="img-wrap">
+                    <img src="images/profiterole.jpg" alt="Profiterole"
+                        data-srcs='["images/profiterole.jpg","images/profiterole.svg"]'>
+                    <button class="badge" aria-label="Çikolata">🍫</button>
+                </div>
+                <div class="card-body">
+                    <h3 class="dessert-name">Profiterole</h3>
+                    <p class="desc">Kremalı hamur toplarının çikolata banyosu.</p>
+                    <div class="meta">
+                        <div class="price">₺80</div><button class="love">❤️</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 14 -->
+            <article class="card" data-category="sütlü">
+                <div class="img-wrap">
+                    <img src="images/sutlac.jpg" alt="Sütlaç" data-srcs='["images/sutlac.jpg","images/sutlac.svg"]'>
+                    <button class="badge" aria-label="Süt">🥛</button>
+                </div>
+                <div class="card-body">
+                    <h3 class="dessert-name">Sütlaç</h3>
+                    <p class="desc">Fırında pişmiş sütlü pirinç tatlısı, tarçınlı.</p>
+                    <div class="meta">
+                        <div class="price">₺120</div><button class="love">❤️</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 15 -->
+            <article class="card" data-category="sütlü">
+                <div class="img-wrap">
+                    <img src="kazan.jpg" alt="kazandibi" data-srcs='["images/kazandibi.jpg","images/kazandibi.svg"]'>
+                    <button class="badge" aria-label="kazandibi"></button>
+                </div>
+                <div class="card-body">
+                    <h3 class="dessert-name"> Kazandibi </h3>
+                    <p class="desc">Dibi tutturularak hafifçe kızartılan muhallebi.</p>
+                    <div class="meta">
+                        <div class="price">₺120</div><button class="love">❤️</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 16 -->
+            <article class="card" data-category="şerbetli">
+                <div class="img-wrap">
+                    <img src="kadayıftatlısı.jpg" alt="kadayıf"
+                        data-srcs='["images/kadayıftatlısı.jpg","images/kadayıftatlısı.svg"]'>
+                    <button class="badge" aria-label="kadayıf"></button>
+                </div>
+                <div class="card-body">
+                    <h3 class="dessert-name"> Kadayıf </h3>
+                    <p class="desc"> Osmanlı mutfağında birçok şerbetli tatlının ortak adıdır.</p>
+                    <div class="meta">
+                        <div class="price">₺100</div><button class="love">❤️</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 17 -->
+            <article class="card" data-category="">
+                <div class="img-wrap">
+                    <img src="tarte-tatin.jpg" alt="tarte tatin"
+                        data-srcs='["images/tarte-tatin.jpg","images/tarte-tatin.svg"]'>
+                    <button class="badge" aria-label="tarte tatin"></button>
+                </div>
+                <div class="card-body">
+                    <h3 class="dessert-name"> Tarte Tatin </h3>
+                    <p class="desc"> Meyvenin (genellikle elma) tart pişirilmeden önce tereyağı ve şekerle karamelize
+                        edildiği bir hamur işidir. </p>
+                    <div class="meta">
+                        <div class="price">₺200</div><button class="love">❤️</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 18 -->
+            <article class="card" data-category="sütlü">
+                <div class="img-wrap">
+                    <img src="traliçe.jpg" alt="trilece" data-srcs='[""]'>
+                    <button class="badge" aria-label="trilece"></button>
+                </div>
+                <div class="card-body">
+                    <h3 class="dessert-name"> Trileçe </h3>
+                    <p class="desc"> Balkanlar kökenli, üç farklı sütle yapılan, üstü karamelize tatlı.</p>
+                    <div class="meta">
+                        <div class="price">₺150</div><button class="love">❤️</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- 19 -->
+            <article class="card" data-category="çikolatalı">
+                <div class="img-wrap">
+                    <img src="vogue-tatlısı.jpg" alt="vogue tatlısı"
+                        data-srcs='["images/vogue-tatlısı.jpg","images/vogue-tatlısı.svg"]'>
+                    <button class="badge" aria-label="vogue tatlısı"></button>
+                </div>
+                <div class="card-body">
+                    <h3 class="dessert-name"> Vogue Tatlısı </h3>
+                    <p class="desc"> krem şanti ve çikolatanın muzla buluşması</p>
+                    <div class="meta">
+                        <div class="price">₺80 </div><button class="love">❤️</button>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+
+        <!-- Favorilerim Bölümü -->
+        <section id="favorilerim" style="margin-top:48px;margin-bottom:48px;display:none">
+            <h2
+                style="font-family:'Dancing Script',cursive;font-size:32px;color:#8b0f4a;margin-bottom:24px;text-align:center">
+                ❤️ Favorilerim</h2>
+            <div id="favoritesList" class="grid">
+                <!-- Favorilere eklenen tatlılar buraya gelecek -->
+            </div>
+            <div id="noFavoritesMsg"
+                style="text-align:center;padding:40px;background:rgba(255,255,255,0.7);border-radius:14px;color:#7a2a4a">
+                <p style="font-size:18px;margin:0">Henüz favorilere bir tatlı eklemediniz... 💔</p>
+                <p style="font-size:14px;margin:12px 0 0 0">Menüdeki tatlıların yanındaki "➕ Ekle" butonuna tıklayarak
+                    favorilerinizi oluşturun!</p>
+            </div>
+        </section>
+
+        <!-- Hakkımızda Bölümü -->
+        <section id="hakkimizda" style="margin-top:48px;margin-bottom:48px">
+            <h2
+                style="font-family:'Dancing Script',cursive;font-size:32px;color:#8b0f4a;margin-bottom:18px;text-align:center">
+                Biz Kimiz?</h2>
+
+            <div
+                style="background:rgba(255,255,255,0.85);padding:24px;border-radius:14px;box-shadow:0 8px 24px rgba(138,50,88,0.1);margin-bottom:24px">
+                <p style="color:#5a2b3d;line-height:1.8;margin:0 0 12px 0">
+                    <strong>Pink Crave</strong>, tatlılara olan sevgimizin ve tutkumuzun bir yansımasıdır. Her tatlı,
+                    ince işçiliğin, kaliteli malzemelerin ve aşkla hazırlanmış anların bir birleşimidir. Melisa
+                    tarafından 2023 yılında kurulmuş olan cafeğimiz, sadece tatlı satmak değil, duygular ve hatıralar
+                    yaratmak amacıyla hizmet vermektedir.
+                </p>
+                <p style="color:#5a2b3d;line-height:1.8;margin:0">
+                    Misyonumuz: Hayallerinizin tatlısını sizinle paylaşmak, her ısırıkta mutluluk keşfetmenizi sağlamak
+                    ve unutulmaz anılar yaratmaktır. Tüm ürünlerimiz taze ve en iyi kalitededir.
+                </p>
+            </div>
+
+            <h3 style="color:#8b0f4a;font-size:22px;margin-bottom:16px">📍 Şubelerimiz</h3>
+            <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px">
+                <div
+                    style="flex:1;min-width:240px;background:var(--card);padding:18px;border-radius:10px;box-shadow:0 8px 20px rgba(138,50,88,0.1);border-left:4px solid #ff6fa3">
+                    <h4 style="color:#8b0f4a;margin:0 0 12px 0">🏪 Merkez Şubesi</h4>
+                    <p style="color:#5a2b3d;margin:0 0 8px 0"><strong>Adres:</strong><br>Gül Sokak No:7, Şehir Merkezi
+                    </p>
+                    <p style="color:#5a2b3d;margin:0 0 8px 0"><strong>Çalışma Saatleri:</strong><br>Hafta içi: 09:00 -
+                        21:00<br>Hafta sonu: 10:00 - 22:00</p>
+                    <p style="color:#5a2b3d;margin:0"><strong>Telefon:</strong><br><a href="tel:+905523656844"
+                            style="color:#ff6fa3;text-decoration:none;font-weight:600">0552 365 6844</a></p>
+                </div>
+
+                <div
+                    style="flex:1;min-width:240px;background:var(--card);padding:18px;border-radius:10px;box-shadow:0 8px 20px rgba(138,50,88,0.1);border-left:4px solid #ff6fa3">
+                    <h4 style="color:#8b0f4a;margin:0 0 12px 0">🌊 Sahil Şubesi</h4>
+                    <p style="color:#5a2b3d;margin:0 0 8px 0"><strong>Adres:</strong><br>Rüzgâr Caddesi No:12, Sahil
+                        Kenarı</p>
+                    <p style="color:#5a2b3d;margin:0 0 8px 0"><strong>Çalışma Saatleri:</strong><br>Hafta içi: 10:00 -
+                        22:00<br>Hafta sonu: 10:00 - 23:00</p>
+                    <p style="color:#5a2b3d;margin:0"><strong>Telefon:</strong><br><a href="tel:+905523656844"
+                            style="color:#ff6fa3;text-decoration:none;font-weight:600">0552 365 6844</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- İletişim Bölümü -->
+        <section id="iletisim" style="margin-top:40px;margin-bottom:40px">
+            <div
+                style="background:linear-gradient(135deg,rgba(255,214,232,0.6),rgba(255,182,213,0.6));padding:32px;border-radius:14px;box-shadow:0 8px 24px rgba(138,50,88,0.12)">
+                <h2
+                    style="font-family:'Dancing Script',cursive;font-size:32px;color:#8b0f4a;margin:0 0 24px 0;text-align:center">
+                    Bizimle İletişime Geçin</h2>
+
+                <div
+                    style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:24px">
+                    <div style="text-align:center;padding:18px;background:rgba(255,255,255,0.8);border-radius:10px">
+                        <div style="font-size:32px;margin-bottom:10px">📞</div>
+                        <p style="color:#5a2b3d;font-size:14px;margin:0 0 8px 0"><strong>Telefon</strong></p>
+                        <a href="tel:+905523656844"
+                            style="color:#ff6fa3;text-decoration:none;font-weight:600;font-size:16px">0552 365 6844</a>
+                    </div>
+
+                    <div style="text-align:center;padding:18px;background:rgba(255,255,255,0.8);border-radius:10px">
+                        <div style="font-size:32px;margin-bottom:10px">📍</div>
+                        <p style="color:#5a2b3d;font-size:14px;margin:0 0 8px 0"><strong>Adres (Merkez)</strong></p>
+                        <p style="color:#5a2b3d;font-size:14px;margin:0">Gül Sokak No:7</p>
+                    </div>
+
+                    <div style="text-align:center;padding:18px;background:rgba(255,255,255,0.8);border-radius:10px">
+                        <div style="font-size:32px;margin-bottom:10px">⏰</div>
+                        <p style="color:#5a2b3d;font-size:14px;margin:0 0 8px 0"><strong>Saatler</strong></p>
+                        <p style="color:#5a2b3d;font-size:13px;margin:0">Hafta içi: 09:00-21:00</p>
+                    </div>
+                </div>
+
+                <div style="background:rgba(255,255,255,0.7);padding:18px;border-radius:10px;text-align:center">
+                    <p style="color:#5a2b3d;margin:0;line-height:1.6">
+                        <strong>Melisa</strong> bizzat kişiler. <br>
+                        Özel siparişler, rezervasyonlar ve sorularınız için lütfen bizi arayınız. <br>
+                        <em style="color:#7a2a4a">Bizi arayın, en sevdiğiniz tatlıyı birlikte daha da tatlı hale
+                            getirelim — her dilim bir tebessüm, her yudum bir anı. 💕</em>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="yerler" style="display:none">
+            <div
+                style="flex:1;min-width:220px;background:var(--card);padding:12px;border-radius:10px;box-shadow:0 8px 20px rgba(138,50,88,0.06)">
+                <strong>Şube 1 — Merkez</strong>
+                <p style="margin:6px 0 0 0">Gül Sokak No:7, Şehir Merkezi<br>Hafta içi 09:00 - 21:00</p>
+            </div>
+            <div
+                style="flex:1;min-width:220px;background:var(--card);padding:12px;border-radius:10px;box-shadow:0 8px 20px rgba(138,50,88,0.06)">
+                <strong>Şube 2 — Sahil</strong>
+                <p style="margin:6px 0 0 0">Rüzgâr Caddesi No:12, Sahil Kenarı<br>Hafta sonu 10:00 - 22:00
+                </p>
+            </div>
+        </section>
+
+        <footer style="text-align:center;padding:20px;margin-top:40px;border-top:2px solid rgba(138,50,88,0.1)">
+            <p style="margin:0;color:#7a2a4a;font-size:14px">
+                © 2024 <strong>Pink Crave</strong> — Tatlı Kafe. Tüm hakları saklıdır. 💖
+            </p>
+        </footer>
+
+        <div class="corner tl" aria-hidden="true">💖</div>
+        <div class="corner tr" aria-hidden="true">🌸</div>
+        <div class="corner bl" aria-hidden="true">🍰</div>
+        <div class="corner br" aria-hidden="true">✨</div>
+        <div class="frame-top" aria-hidden="true"></div>
+        <div class="frame-right" aria-hidden="true"></div>
+        <div class="frame-bottom" aria-hidden="true"></div>
+        <div class="frame-left" aria-hidden="true"></div>
+    </div>
+
+    <script>
+        // Kalori Verileri
+        const CALORIES_DATA = {
+            tiramisu: 350,
+            cheesecake: 380,
+            pannacotta: 280,
+            baklava: 420,
+            éclair: 310,
+            éclair2: 310,
+            makaron: 180,
+            çikolatalılavacake: 450,
+            çilekilart: 320,
+            crèmebrûlée: 290,
+            millfeuille: 400,
+            künefe: 480,
+            crêpesuzette: 340,
+            profiterole: 360,
+            sütlaç: 250,
+            kazandibi: 260,
+            kadayıf: 440,
+            tartetatin: 380,
+            trileçe: 270,
+            voguetatlısı: 420
+        };
+
+        // Favorites ve Rating Sistemi
+        const FAVORITES_KEY = 'pink_crave_favorites';
+        const RATINGS_KEY = 'pink_crave_ratings';
+
+        // LocalStorage'dan favorileri yükle
+        function loadFavorites() {
+            const fav = localStorage.getItem(FAVORITES_KEY);
+            return fav ? JSON.parse(fav) : [];
+        }
+
+        // LocalStorage'dan ratings'i yükle
+        function loadRatings() {
+            const rat = localStorage.getItem(RATINGS_KEY);
+            return rat ? JSON.parse(rat) : {};
+        }
+
+        // Favorileri kaydet
+        function saveFavorites(favorites) {
+            localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+        }
+
+        // Ratings'i kaydet
+        function saveRatings(ratings) {
+            localStorage.setItem(RATINGS_KEY, JSON.stringify(ratings));
+        }
+
+        // İnit - Favorileri ve Rating'i UI'da göster
+        function initFavoritesAndRatings() {
+            const favorites = loadFavorites();
+            const ratings = loadRatings();
+
+            document.querySelectorAll('.card').forEach(card => {
+                // data-dessert-id ekle
+                if (!card.dataset.dessertId) {
+                    const name = card.querySelector('.dessert-name').textContent.trim();
+                    const id = name.toLowerCase().replace(/[^\w]/g, '');
+                    card.dataset.dessertId = id;
+                    card.dataset.dessertName = name;
+                }
+
+                const dessertId = card.dataset.dessertId;
+                const cardBody = card.querySelector('.card-body');
+
+                // Favorite section yoksa ekle
+                let favSection = card.querySelector('.favorite-section');
+                if (!favSection) {
+                    favSection = document.createElement('div');
+                    favSection.className = 'favorite-section';
+                    favSection.style.marginTop = '8px';
+                    favSection.style.marginBottom = '8px';
+
+                    const favBtn = document.createElement('button');
+                    favBtn.className = 'favorite-btn';
+                    favBtn.dataset.dessert = dessertId;
+
+                    favSection.appendChild(favBtn);
+                    // meta div öncesine ekle
+                    const metaDiv = card.querySelector('.meta');
+                    if (metaDiv) {
+                        metaDiv.parentNode.insertBefore(favSection, metaDiv);
+                    } else {
+                        cardBody.appendChild(favSection);
+                    }
+                }
+
+                // Rating section yoksa ekle
+                let ratingDiv = card.querySelector('.rating-container');
+                if (!ratingDiv) {
+                    ratingDiv = document.createElement('div');
+                    ratingDiv.className = 'rating-container';
+
+                    const label = document.createElement('span');
+                    label.className = 'rating-label';
+                    label.textContent = 'Değerlendirme:';
+                    ratingDiv.appendChild(label);
+
+                    const starsDiv = document.createElement('div');
+                    starsDiv.className = 'stars';
+                    starsDiv.dataset.dessert = dessertId;
+
+                    for (let i = 1; i <= 5; i++) {
+                        const star = document.createElement('span');
+                        star.className = 'star empty';
+                        star.dataset.rating = i;
+                        star.innerHTML = '★';
+                        starsDiv.appendChild(star);
+                    }
+
+                    ratingDiv.appendChild(starsDiv);
+
+                    // meta div öncesine ekle
+                    const metaDiv = card.querySelector('.meta');
+                    if (metaDiv) {
+                        metaDiv.parentNode.insertBefore(ratingDiv, metaDiv);
+                    } else {
+                        cardBody.appendChild(ratingDiv);
+                    }
+                }
+
+                // Event listeners ekle
+                const favBtn = card.querySelector('.favorite-btn');
+                if (favBtn) {
+                    const isFavorited = favorites.includes(dessertId);
+                    updateFavBtn(favBtn, isFavorited);
+                    favBtn.addEventListener('click', () => toggleFavorite(dessertId, favBtn));
+                }
+
+                // Rating yıldızları varsa güncelle
+                const starsDiv = card.querySelector('.stars');
+                if (starsDiv) {
+                    const rating = ratings[dessertId] || 0;
+                    const stars = starsDiv.querySelectorAll('.star');
+                    stars.forEach(star => {
+                        star.addEventListener('click', (e) => {
+                            const newRating = parseInt(e.target.dataset.rating);
+                            setRating(dessertId, newRating, starsDiv);
+                        });
+                    });
+                    updateStars(starsDiv, rating);
+                }
+
+                // Kalori bilgisi ekle
+                let caloriesDiv = card.querySelector('.calories-info');
+                if (!caloriesDiv) {
+                    const calories = getCalories(dessertId);
+                    if (calories) {
+                        caloriesDiv = document.createElement('div');
+                        caloriesDiv.className = 'calories-info';
+                        caloriesDiv.innerHTML = `🔥 <span class="calories-value">${calories} kcal</span>`;
+
+                        // Rating div'inin altına ekle
+                        const ratingSection = card.querySelector('.rating-container');
+                        if (ratingSection) {
+                            ratingSection.parentNode.insertBefore(caloriesDiv, ratingSection.nextSibling);
+                        } else {
+                            const metaDiv = card.querySelector('.meta');
+                            if (metaDiv) {
+                                metaDiv.parentNode.insertBefore(caloriesDiv, metaDiv);
+                            } else {
+                                cardBody.appendChild(caloriesDiv);
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Tatlı için kalori al
+        function getCalories(dessertId) {
+            // Doğrudan ID ile ara
+            if (CALORIES_DATA[dessertId]) {
+                return CALORIES_DATA[dessertId];
+            }
+
+            // Normalize edip ara
+            const normalized = dessertId.toLowerCase().replace(/[^\w]/g, '');
+            for (let key in CALORIES_DATA) {
+                if (key.replace(/[^\w]/g, '') === normalized) {
+                    return CALORIES_DATA[key];
+                }
+            }
+
+            return null;
+        }
+
+        // Favorite butonunu güncelle
+        function updateFavBtn(btn, isFavorited) {
+            if (isFavorited) {
+                btn.classList.add('added');
+                btn.textContent = '❤️ Favorilerde';
+            } else {
+                btn.classList.remove('added');
+                btn.textContent = '➕ Ekle';
+            }
+        }
+
+        // Favoriyi aç/kapat
+        function toggleFavorite(dessertId, btn) {
+            const favorites = loadFavorites();
+            const index = favorites.indexOf(dessertId);
+
+            if (index > -1) {
+                favorites.splice(index, 1);
+            } else {
+                favorites.push(dessertId);
+            }
+
+            saveFavorites(favorites);
+            updateFavBtn(btn, !favorites.includes(dessertId) ? false : true);
+
+            // Favorilerim bölümünü güncelle
+            if (document.getElementById('favorilerim').style.display === 'block') {
+                displayFavorites();
+            }
+        }
+
+        // Rating yıldızlarını güncelle
+        function updateStars(starsDiv, rating) {
+            starsDiv.querySelectorAll('.star').forEach((star, idx) => {
+                if (idx < rating) {
+                    star.classList.remove('empty');
+                    star.classList.add('filled');
+                } else {
+                    star.classList.add('empty');
+                    star.classList.remove('filled');
+                }
+            });
+        }
+
+        // Rating'i kaydet
+        function setRating(dessertId, rating, starsDiv) {
+            const ratings = loadRatings();
+            ratings[dessertId] = rating;
+            saveRatings(ratings);
+            updateStars(starsDiv, rating);
+        }
+
+        // Try a list of candidate sources (local JPGs, root files, then SVG) for each image.
+        document.addEventListener('DOMContentLoaded', () => {
+            // Favorileri ve Ratings'i init et
+            initFavoritesAndRatings();
+
+            document.querySelectorAll('img[data-srcs]').forEach(img => {
+                tryLoadList(img, JSON.parse(img.getAttribute('data-srcs')));
+            });
+        });
+
+        function tryLoadList(img, list) {
+            if (!list || !list.length) return;
+            let i = 0;
+            function tryNext() {
+                if (i >= list.length) return;
+                const candidate = list[i++];
+                const tester = new Image();
+                tester.onload = () => { img.src = candidate; };
+                tester.onerror = () => { tryNext(); };
+                tester.src = candidate;
+            }
+            tryNext();
+        }
+
+        const searchInput = document.getElementById("searchInput");
+        const categoryFilter = document.getElementById("categoryFilter");
+
+        function filterDesserts() {
+            const searchValue = searchInput.value.toLowerCase();
+            const categoryValue = categoryFilter.value;
+
+            const cards = document.querySelectorAll(".card");
+
+            cards.forEach(card => {
+                const name = card.querySelector(".dessert-name").textContent.toLowerCase();
+                const desc = card.querySelector(".desc").textContent.toLowerCase();
+                const category = card.dataset.category;
+
+                const matchName = name.includes(searchValue) || desc.includes(searchValue);
+                const matchCategory = categoryValue === "" || category === categoryValue;
+
+                if (matchName && matchCategory) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        searchInput.addEventListener("keyup", filterDesserts);
+        categoryFilter.addEventListener("change", filterDesserts);
+
+        // Favorileri göster
+        function displayFavorites() {
+            const favorites = loadFavorites();
+            const favList = document.getElementById('favoritesList');
+            const noFavMsg = document.getElementById('noFavoritesMsg');
+            const favSection = document.getElementById('favorilerim');
+
+            // Listeleri temizle
+            favList.innerHTML = '';
+
+            if (favorites.length === 0) {
+                noFavMsg.style.display = 'block';
+                favList.style.display = 'none';
+                favSection.style.display = 'block';
+                return;
+            }
+
+            noFavMsg.style.display = 'none';
+            favList.style.display = 'grid';
+            favSection.style.display = 'block';
+
+            // Menüdeki tüm kartları scan et
+            const allCards = document.querySelectorAll('#menu .card');
+            const addedIds = new Set();
+
+            allCards.forEach(card => {
+                const dessertId = card.dataset.dessertId;
+
+                if (favorites.includes(dessertId) && !addedIds.has(dessertId)) {
+                    // Kartı kopyala
+                    const clone = card.cloneNode(true);
+
+                    // Clone'daki event listeners'ı yeniden bağla
+                    const favBtn = clone.querySelector('.favorite-btn');
+                    if (favBtn) {
+                        favBtn.addEventListener('click', () => {
+                            toggleFavorite(dessertId, favBtn);
+                            displayFavorites(); // Favorileri yeniden göster
+                        });
+                    }
+
+                    const starsDiv = clone.querySelector('.stars');
+                    if (starsDiv) {
+                        starsDiv.querySelectorAll('.star').forEach(star => {
+                            star.addEventListener('click', (e) => {
+                                const newRating = parseInt(e.target.dataset.rating);
+                                setRating(dessertId, newRating, starsDiv);
+                            });
+                        });
+                    }
+
+                    favList.appendChild(clone);
+                    addedIds.add(dessertId);
+                }
+            });
+        }
+
+        // Favorilerim linkine tıklandığında göster
+        document.addEventListener('DOMContentLoaded', () => {
+            const favLink = document.querySelector('a[href="#favorilerim"]');
+            if (favLink) {
+                favLink.addEventListener('click', displayFavorites);
+            }
+        });
+    </script>
+</body>
+
+</html>
